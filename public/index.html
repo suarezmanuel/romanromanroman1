@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    displayName:<input><br>
+    username:<input><br>
+    pfp:<input><br>
+    <button onclick="createUser()">create user</button><br>
+    <br><br>
+    username1:<input><br>
+    username2:<input><br>
+    <button onclick="sendFriendRequest()">send friend request</button><br>
+    <button onclick="acceptFriendRequest()">accept friend request</button><br>
+
+
+    <script>
+        async function createUser() {
+            const users = await fetch('http://localhost:3000/user', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    displayName: document.getElementsByTagName('input')[0].value,
+                    username: document.getElementsByTagName('input')[1].value,
+                    pfp: document.getElementsByTagName('input')[2].value
+                })
+            }).then(data => data.json())
+        }
+
+        async function sendFriendRequest() {
+            console.log(document.getElementsByTagName('input')[3].value)
+            console.log(document.getElementsByTagName('input')[4].value)
+            const users = await fetch('http://localhost:3000/user/friendRequest/send', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username1: document.getElementsByTagName('input')[3].value,
+                    username2: document.getElementsByTagName('input')[4].value,
+                })
+            }).then(data => data.json())
+        }
+        async function acceptFriendRequest() {
+            console.log(document.getElementsByTagName('input')[3].value)
+            console.log(document.getElementsByTagName('input')[4].value)
+            const users = await fetch('http://localhost:3000/user/friendRequest/accept', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username1: document.getElementsByTagName('input')[3].value,
+                    username2: document.getElementsByTagName('input')[4].value,
+                })
+            }).then(data => data.json())
+        }
+    </script>
+</body>
+
+</html>
