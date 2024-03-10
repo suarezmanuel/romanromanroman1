@@ -10,6 +10,7 @@
 <body>
     displayName:<input><br>
     username:<input><br>
+    password:<input><br>
     pfp:<input><br>
     <button onclick="createUser()">create user</button><br>
     <br><br>
@@ -29,36 +30,33 @@
                 body: JSON.stringify({
                     displayName: document.getElementsByTagName('input')[0].value,
                     username: document.getElementsByTagName('input')[1].value,
-                    pfp: document.getElementsByTagName('input')[2].value
+                    password: document.getElementsByTagName('input')[2].value,
+                    pfp: document.getElementsByTagName('input')[3].value
                 })
             }).then(data => data.json())
         }
 
         async function sendFriendRequest() {
-            console.log(document.getElementsByTagName('input')[3].value)
-            console.log(document.getElementsByTagName('input')[4].value)
             const users = await fetch('http://localhost:3000/user/friendRequest/send', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    username1: document.getElementsByTagName('input')[3].value,
-                    username2: document.getElementsByTagName('input')[4].value,
+                    username1: document.getElementsByTagName('input')[4].value,
+                    username2: document.getElementsByTagName('input')[5].value,
                 })
             }).then(data => data.json())
         }
         async function acceptFriendRequest() {
-            console.log(document.getElementsByTagName('input')[3].value)
-            console.log(document.getElementsByTagName('input')[4].value)
             const users = await fetch('http://localhost:3000/user/friendRequest/accept', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    username1: document.getElementsByTagName('input')[3].value,
-                    username2: document.getElementsByTagName('input')[4].value,
+                    username1: document.getElementsByTagName('input')[4].value,
+                    username2: document.getElementsByTagName('input')[5].value,
                 })
             }).then(data => data.json())
         }

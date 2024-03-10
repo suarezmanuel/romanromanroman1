@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -11,17 +12,21 @@ const User = new Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     pfp: {
         type: String,
         required: true
     },
     friends: [{
-        type: String,
-        default: []
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }],
     friendRequests: [{
-        type: String,
-        default: []
-    }]
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }],
 });
 module.exports = mongoose.model('User', User, "users");

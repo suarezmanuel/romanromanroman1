@@ -12,9 +12,9 @@ const Post = new Schema({
         type: String,
         required: true
     },
-    author: {
-        type: User,
-        required: true
+    authorId: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     },
     date: {
         type: Date,
@@ -25,4 +25,4 @@ const Post = new Schema({
         default: 0
     }
 });
-module.exports = mongoose.model('Post', Post);
+module.exports = mongoose.model('Post', Post, "posts");

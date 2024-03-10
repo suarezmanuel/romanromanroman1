@@ -5,15 +5,17 @@ const Schema = mongoose.Schema;
 
 const Comment = new Schema({
     postId: {
-        type: Number,
+        type: Schema.Types.ObjectId,
         required: true
     },
-    user: {
-        type: User,
-        required: true
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     },
-    author: {
-        type: Array < String > []
+    //author is username
+    authorId: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     },
     date: {
         type: Date,
@@ -24,4 +26,4 @@ const Comment = new Schema({
         required: true
     }
 });
-module.exports = mongoose.model('Comment', Comment);
+module.exports = mongoose.model('Comment', Comment, "comments");
