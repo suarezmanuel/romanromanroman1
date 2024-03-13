@@ -201,14 +201,14 @@
 
 
         async function sendFriendRequest() {
-            const users = await fetch('http://localhost:3000/api', {
+            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('send1').value + '/friends',
+             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    username1: document.getElementsByTagName('input')[4].value,
-                    username2: document.getElementsByTagName('input')[5].value,
+                    fid: document.getElementById('send2').value,
                 })
             }).then(data => data.json())
         }
@@ -216,16 +216,14 @@
 
 
         async function acceptFriendRequest() {
-            const users = await fetch('http://localhost:3000/api', {
-                method: "POST",
+            console.log("1")
+            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('accept1').value + '/friends/' + document.getElementById('accept2').value, {
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username1: document.getElementsByTagName('input')[4].value,
-                    username2: document.getElementsByTagName('input')[5].value,
-                })
+                }
             }).then(data => data.json())
+            console.log("2")
         }
 
     </script>

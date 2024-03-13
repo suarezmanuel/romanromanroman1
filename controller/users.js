@@ -20,19 +20,20 @@ const getUser = async (req, res) => {
 }
 
 const getFriends = async (req, res) => {
-    res.json(await userService.getFriends(req.body._id))
+    res.json(await userService.getFriends(req.body.id))
 }
 const sendFriendRequest = async (req, res) => {
-    res.json(await userService.sendFriendRequest(req.body._id1, req.body._id2))
+    res.json(await userService.sendFriendRequest(req.params.id, req.body.fid))
 }
 const acceptFriendRequest = async (req, res) => {
-    res.json(await userService.acceptFriendRequest(req.body._id1, req.body._id2))
+    res.json(await userService.acceptFriendRequest(req.params.id, req.params.fid))
 }
 const checkFriendRequest = async (req, res) => {
-    res.json(await userService.checkFriendRequest(req.body._id1, req.body._id2))
+    res.json(await userService.checkFriendRequest(req.body.id1, req.body.id2))
 }
+
 const doesUserExist = async (req, res) => {
-    res.json(await userService.doesUserExist(req.body._id))
+    res.json(await userService.doesUserExist(req.body.id))
 }
 const checkCredentials = async (req, res) => {
     res.json(await userService.checkCredentials(req.body.username, req.body.password))
@@ -40,5 +41,5 @@ const checkCredentials = async (req, res) => {
 
 module.exports = {
     createUser, getUsers, getUser, sendFriendRequest,
-    acceptFriendRequest, checkFriendRequest, doesUserExist, checkCredentials
+    acceptFriendRequest, checkFriendRequest, doesUserExist, checkCredentials, getFriends
 }

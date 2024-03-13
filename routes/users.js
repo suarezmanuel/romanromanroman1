@@ -12,15 +12,17 @@ router.route('/')
 // router.route('/:id/friends')
 //     .get(userController.getFriends)
 
-// router.route('/:id/friends')
-//     .get(userController.getFriends)
-
 router.route('/:id/posts')
     .get(postController.getUserPosts)
     .post(postController.createPost)
 
-// router.route('/:username')
-//     .get(userController.getUser)
+router.route('/:id/friends')
+    .get(userController.getFriends)
+    .post(userController.sendFriendRequest)
+    
+router.route('/:id/friends/:fid')
+    .patch(userController.getFriends)
+    .delete(userController.getFriends)
 
 module.exports = router;
 
@@ -36,9 +38,11 @@ module.exports = router;
 -  /api/users/:id              - PATCH edits user with id ":id" 
 -  /api/users/:id              - DELETE returns user with id ":id" 
 
+-  /api/users/:id/posts        - GET returns users post if friend with ":id"
 -  /api/users/:id/posts        - POST creates new post to user with id ":id" 
 -  /api/users/:id/posts/:pid   - PATCH edits post with id ":pid"
 -  /api/users/:id/posts/:pid   - DELETE deletes post with id ":pid"
+
 -  /api/posts                  - GET returns list of 20 posts
 
 -  /api/users/:id/friends      - GET returns array of friends (only if called by user itself or friend)
@@ -46,5 +50,4 @@ module.exports = router;
 -  /api/users/:id/friends/:fid - PATCH accepts :fid from :id
 -  /api/users/:id/friends/:fid - DELETE denies :fid from :id
 
--  /api/users/:id/posts GET returns users post if friend with ":id"
 */
