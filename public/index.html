@@ -17,11 +17,15 @@
             <button onclick="createUser()">create user</button><br>
     </div>
 
+
+
     <div id="getusers" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get users</b><br>
         <textarea id="getusers1"></textarea>
         <button onclick="getUsers()">get users</button><br>
     </div>
+
+
 
     <div id="createpost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Create Post</b><br>
@@ -32,6 +36,8 @@
             <!-- likes:       <input id="createpost5"><br> -->
             <button onclick="createPost()">create post</button><br>
     </div>
+
+
     
     <div id="getallposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get All Posts</b><br>
@@ -39,44 +45,36 @@
         <button onclick="getAllPosts()">get posts</button><br>
     </div> 
 
+
+
     <div id="getposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get User Posts</b><br>
         user id:   <input id="getposts1"><br>
         <textarea id="getposts2"></textarea>
         <button onclick="getUserPosts()">get posts</button><br>
     </div>  
-    
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
     <div id="createcomment" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Create Comment</b><br>
             parent post id:     <input id="createcomment1"><br>
-            author id:          <input id="createcomment3"><br>
-            content:            <input id="createcomment2"><br>
-            pfp:                <input id="createcomment4"><br>
-            <button onclick="createComment()">create post</button><br>
+            author id:          <input id="createcomment2"><br>
+            content:            <input id="createcomment3"><br>
+            <button onclick="createCommenta()">create comment</button><br>
     </div>
+
+
 
     <div id="getcomments" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get Comments</b><br>
         parent post id:         <input id="getcomments1"><br>
         <textarea></textarea>
         
-        <button onclick="getComments()">get posts</button><br>
+        <button onclick="getPostComments()">get comments</button><br>
     </div> 
+
+
 
     <div id="sendrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Send friend request</b><br>
@@ -85,6 +83,8 @@
         <button onclick="sendFriendRequest()">send friend request</button><br>
     </div>  
 
+
+
     <div id="acceptrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Accept friend request</b><br>
         from id:  <input id="accept1"><br>
@@ -92,16 +92,10 @@
         <button onclick="acceptFriendRequest()">accept friend request</button><br>
     </div>  
 
+
+
     <script>
         async function createUser() {
-
-            // console.log(JSON.stringify({
-            //         displayName: document.getElementById('createuser1').value,
-            //         username: document.getElementById('createuser2').value,
-            //         password: document.getElementById('createuser3').value,
-            //         pfp: document.getElementById('createuser4').value
-            //     }))
-
             const user = await fetch('http://localhost:3000/api/users', {
                 method: "POST",
                 headers: {
@@ -116,6 +110,8 @@
             }).then(data => data.json())
         }
 
+
+
         async function getUsers() {
             const users = await fetch('http://localhost:3000/api/users', {
                 method: "GET",
@@ -129,13 +125,8 @@
         }
 
 
+
         async function createPost() {
-            // console.log(JSON.stringify({
-            //         content: document.getElementById('createpost1').value,
-            //         image: document.getElementById('createpost2').value,
-            //         // authorId: document.getElementById('createpost3').value,
-            //         date: new Date()
-            //     }))
             const post = await fetch('http://localhost:3000/api/users/'+ document.getElementById('createpost3').value +'/posts', {
                 method: "POST",
                 headers: {
@@ -144,11 +135,12 @@
                 body: JSON.stringify({
                     content: document.getElementById('createpost1').value,
                     image: document.getElementById('createpost2').value,
-                    // authorId: document.getElementById('createpost3').value,
                     date: new Date()
                 })
             }).then(data => data.json())
         }
+
+
 
         async function getAllPosts() {
             const posts = await fetch('http://localhost:3000/api/posts', {
@@ -161,6 +153,7 @@
             console.log(posts);
             document.getElementById('getallposts1').innerText = JSON.stringify(posts);
         }
+
 
 
         async function getUserPosts() {
@@ -177,14 +170,33 @@
 
 
 
+        async function createCommenta() {
+            // first param is passed through the link
+            const comment = await fetch('http://localhost:3000/api/posts/'+ document.getElementById('createcomment1').value, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    authorId: document.getElementById('createcomment2').value,
+                    content: document.getElementById('createcomment3').value,
+                })
+            }).then(data => data.json())
+        }
 
 
 
+        async function getPostComments() {
+            const users = await fetch('http://localhost:3000/api/posts/' + document.getElementById('getcomments1').value , {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then(data => data.json())
 
-
-
-
-
+            // console.log(users);
+            document.getElementById('getcomments2').innerText = JSON.stringify(users);
+        }
 
 
 
@@ -202,6 +214,7 @@
         }
 
 
+
         async function acceptFriendRequest() {
             const users = await fetch('http://localhost:3000/api', {
                 method: "POST",
@@ -214,7 +227,6 @@
                 })
             }).then(data => data.json())
         }
-
 
     </script>
 </body>

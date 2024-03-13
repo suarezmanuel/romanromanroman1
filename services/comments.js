@@ -1,12 +1,16 @@
 const Comment = require("../models/comments");
 
-const createComment = async (postId, userId, authorId) => {
+const createComment = async (postId, authorId, content) => {
     const comment = new Comment({
         postId: postId,
-        userId: userId,
-        authorId: authorId
+        authorId: authorId,
+        content: content
     })
     return await comment.save();
 }
 
-module.exports = { createComment }
+const getComments = async (postId) => {
+    return await Post.find({ _id: postId });
+}
+
+module.exports = { createComment, getComments }
