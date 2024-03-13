@@ -8,36 +8,179 @@
 </head>
 
 <body>
-    displayName:<input><br>
-    username:<input><br>
-    password:<input><br>
-    pfp:<input><br>
-    <button onclick="createUser()">create user</button><br>
-    <br><br>
-    username1:<input><br>
-    username2:<input><br>
-    <button onclick="sendFriendRequest()">send friend request</button><br>
-    <button onclick="acceptFriendRequest()">accept friend request</button><br>
+    <div id="createuser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Create User</b><br>
+            displayName:<input id="createuser1"><br>
+            username:   <input id="createuser2"><br>
+            password:   <input id="createuser3"><br>
+            pfp:        <input id="createuser4"><br>
+            <button onclick="createUser()">create user</button><br>
+    </div>
 
+    <div id="getusers" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Get users</b><br>
+        <textarea id="getusers1"></textarea>
+        <button onclick="getUsers()">get users</button><br>
+    </div>
+
+    <div id="createpost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Create Post</b><br>
+            author id:   <input id="createpost3"><br>
+            content:     <input id="createpost1"><br>
+            image:       <input id="createpost2"><br>
+            <!-- date:        <input id="createpost4"><br> -->
+            likes:       <input id="createpost5"><br>
+            <button onclick="createUser()">create post</button><br>
+    </div>
+    
+    <div id="getallposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Get All Posts</b><br>
+        <textarea></textarea>
+        <button onclick="getAllPosts()">get posts</button><br>
+    </div> 
+
+    <div id="getposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Get User Posts</b><br>
+        user id:   <input id="getposts1"><br>
+        <textarea id="getposts2"></textarea>
+        <button onclick="getUserPosts()">get posts</button><br>
+    </div>  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="createcomment" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Create Comment</b><br>
+            parent post id:     <input id="createcomment1"><br>
+            author id:          <input id="createcomment3"><br>
+            content:            <input id="createcomment2"><br>
+            pfp:                <input id="createcomment4"><br>
+            <button onclick="createComment()">create post</button><br>
+    </div>
+
+    <div id="getcomments" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Get Comments</b><br>
+        parent post id:         <input id="getcomments1"><br>
+        <textarea></textarea>
+        
+        <button onclick="getComments()">get posts</button><br>
+    </div> 
+
+    <div id="sendrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Send friend request</b><br>
+        from id:  <input id="send1"><br>
+        to id:    <input id="send2"><br>
+        <button onclick="sendFriendRequest()">send friend request</button><br>
+    </div>  
+
+    <div id="acceptrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+        <b>Accept friend request</b><br>
+        from id:  <input id="accept1"><br>
+        to id:    <input id="accept2"><br>
+        <button onclick="acceptFriendRequest()">accept friend request</button><br>
+    </div>  
 
     <script>
         async function createUser() {
-            const users = await fetch('http://localhost:3000/user', {
+
+            console.log(JSON.stringify({
+                    displayName: document.getElementById('createuser1').value,
+                    username: document.getElementById('createuser2').value,
+                    password: document.getElementById('createuser3').value,
+                    pfp: document.getElementById('createuser4').value
+                }))
+
+            const users = await fetch('http://localhost:3000/api/users', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    displayName: document.getElementsByTagName('input')[0].value,
-                    username: document.getElementsByTagName('input')[1].value,
-                    password: document.getElementsByTagName('input')[2].value,
-                    pfp: document.getElementsByTagName('input')[3].value
+                    displayName: document.getElementById('createuser1').value,
+                    username: document.getElementById('createuser2').value,
+                    password: document.getElementById('createuser3').value,
+                    pfp: document.getElementById('createuser4').value
                 })
             }).then(data => data.json())
         }
 
+        async function getUsers() {
+            const users = await fetch('http://localhost:3000/api/users', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }).then(data => data.json())
+
+            console.log(users);
+            document.getElementById('getusers1').innerText = JSON.stringify(users);
+        }
+
+
+
+        
+        async function getAllPosts() {
+            const users = await fetch('http://localhost:3000/api/posts', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }).then(data => data.json())
+
+            console.log(users);
+            document.getElementById('getusers1').innerText = JSON.stringify(users);
+        }
+
+
+
+
+
+        async function getUserPosts() {
+            // will look like this http://localhost:3000/api/users/:id
+            // if do GET request, well get all of his posts
+
+            // TODO: change POST to GET
+            const users = await fetch('http://localhost:3000/api/users/:id/posts' , {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    _id: document.getElementById('getposts1').value
+                })
+            }).then(data => data.json())
+
+            console.log(users);
+            document.getElementById('getposts2').innerText = JSON.stringify(users);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         async function sendFriendRequest() {
-            const users = await fetch('http://localhost:3000/user/friendRequest/send', {
+            const users = await fetch('http://localhost:3000/api', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -48,8 +191,10 @@
                 })
             }).then(data => data.json())
         }
+
+
         async function acceptFriendRequest() {
-            const users = await fetch('http://localhost:3000/user/friendRequest/accept', {
+            const users = await fetch('http://localhost:3000/api', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -60,6 +205,8 @@
                 })
             }).then(data => data.json())
         }
+
+
     </script>
 </body>
 
