@@ -6,7 +6,6 @@ const postController = require('../controller/posts');
 
 router.route('/')
     .get(postController.getAllPosts)
-    .post(postController.createPost)
 
 module.exports = router;
 

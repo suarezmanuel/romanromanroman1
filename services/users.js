@@ -26,6 +26,7 @@ const sendFriendRequest = async (id1, id2) => {
     return true;
 }
 const acceptFriendRequest = async (id1, id2) => {
+    console.log("123");
     if (id1 == id2) return false
     let user1 = (await User.findOne({ _id: id1 }));
     if (!user1) return false
