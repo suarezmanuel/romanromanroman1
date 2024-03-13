@@ -16,7 +16,8 @@ router.route('/')
 //     .get(userController.getFriends)
 
 router.route('/:id/posts')
-    .get(postController.getPosts)
+    .get(postController.getUserPosts)
+    .post(postController.createPost)
 
 // router.route('/:username')
 //     .get(userController.getUser)

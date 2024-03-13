@@ -29,13 +29,13 @@
             content:     <input id="createpost1"><br>
             image:       <input id="createpost2"><br>
             <!-- date:        <input id="createpost4"><br> -->
-            likes:       <input id="createpost5"><br>
-            <button onclick="createUser()">create post</button><br>
+            <!-- likes:       <input id="createpost5"><br> -->
+            <button onclick="createPost()">create post</button><br>
     </div>
     
     <div id="getallposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get All Posts</b><br>
-        <textarea></textarea>
+        <textarea id="getallposts1"></textarea>
         <button onclick="getAllPosts()">get posts</button><br>
     </div> 
 
@@ -95,14 +95,14 @@
     <script>
         async function createUser() {
 
-            console.log(JSON.stringify({
-                    displayName: document.getElementById('createuser1').value,
-                    username: document.getElementById('createuser2').value,
-                    password: document.getElementById('createuser3').value,
-                    pfp: document.getElementById('createuser4').value
-                }))
+            // console.log(JSON.stringify({
+            //         displayName: document.getElementById('createuser1').value,
+            //         username: document.getElementById('createuser2').value,
+            //         password: document.getElementById('createuser3').value,
+            //         pfp: document.getElementById('createuser4').value
+            //     }))
 
-            const users = await fetch('http://localhost:3000/api/users', {
+            const user = await fetch('http://localhost:3000/api/users', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -129,37 +129,46 @@
         }
 
 
+        async function createPost() {
+            // console.log(JSON.stringify({
+            //         content: document.getElementById('createpost1').value,
+            //         image: document.getElementById('createpost2').value,
+            //         // authorId: document.getElementById('createpost3').value,
+            //         date: new Date()
+            //     }))
+            const post = await fetch('http://localhost:3000/api/users/'+ document.getElementById('createpost3').value +'/posts', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    content: document.getElementById('createpost1').value,
+                    image: document.getElementById('createpost2').value,
+                    // authorId: document.getElementById('createpost3').value,
+                    date: new Date()
+                })
+            }).then(data => data.json())
+        }
 
-        
         async function getAllPosts() {
-            const users = await fetch('http://localhost:3000/api/posts', {
+            const posts = await fetch('http://localhost:3000/api/posts', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 }
             }).then(data => data.json())
 
-            console.log(users);
-            document.getElementById('getusers1').innerText = JSON.stringify(users);
+            console.log(posts);
+            document.getElementById('getallposts1').innerText = JSON.stringify(posts);
         }
 
 
-
-
-
         async function getUserPosts() {
-            // will look like this http://localhost:3000/api/users/:id
-            // if do GET request, well get all of his posts
-
-            // TODO: change POST to GET
-            const users = await fetch('http://localhost:3000/api/users/:id/posts' , {
-                method: "POST",
+            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('getposts1').value +'/posts' , {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    _id: document.getElementById('getposts1').value
-                })
             }).then(data => data.json())
 
             console.log(users);

@@ -1,10 +1,12 @@
 const Post = require("../models/posts");
 
-const createPost = async (content, image, authorId) => {
+const createPost = async (content, image, authorId, date) => {
     const post = new Post({
         content: content,
         image: image,
-        authorId: authorId
+        authorId: authorId,
+        date: date,
+        likes: 0
     })
     await post.save();
 }
@@ -25,8 +27,12 @@ const removePost = async (postId) => {
     return post != []
 }
 
-const getPosts = async (userId) => {
-    return await Post.find({ authorId: userId })
+const getPostById = async (userId) => {
+    return await Post.find({ authorId: userId });
 }
 
-module.exports = { createPost, editPost, removePost, getPosts }
+const getPosts = async () => {
+    return await Post.find({});
+}
+
+module.exports = { createPost, editPost, removePost, getPosts, getPostById }

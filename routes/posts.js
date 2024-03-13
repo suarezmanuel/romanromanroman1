@@ -5,7 +5,7 @@ const postController = require('../controller/posts');
 // localhost/user/api/users
 
 router.route('/')
-    .get(postController.getPosts)
+    .get(postController.getAllPosts)
     .post(postController.createPost)
 
 module.exports = router;

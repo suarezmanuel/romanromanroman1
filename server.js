@@ -8,6 +8,8 @@ customEnv.env(process.env.NODE_ENV, './config');
 
 const users = require('./routes/users')
 
+const posts = require('./routes/posts')
+
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -23,6 +25,6 @@ server.use(express.json())
 // this is the magic
 server.use('/api/users', users)
 
-// server.use('/api/users', users)
+server.use('/api/posts', posts)
 
 server.listen(process.env.SERVER_PORT)
