@@ -29,6 +29,8 @@ server.use('/api/users', users)
 
 server.use('/api/posts', posts)
 
+// server.use('/api/posts', posts)
+
 server.use('/api/tokens', tokens)
 
 server.listen(process.env.SERVER_PORT)

@@ -2,8 +2,9 @@ const express = require('express');
 var router = express.Router();
 const userController = require('../controller/users');
 const postController = require('../controller/posts');
+const commentController = require('../controller/comments');
 const tokensController = require('../controller/tokens');
-// localhost/user/api/users
+
 
 router.route('/')
     .get(userController.getUsers)
@@ -14,9 +15,6 @@ router.route('/:id')
     .patch(userController.editUser)
     .delete(userController.deleteUser)
 
-// router.route('/:id/friends')
-//     .get(userController.getFriends)
-
 router.route('/:id/posts')
     .get(tokensController.isLoggedIn, postController.getUserPosts)
     .post(tokensController.isLoggedIn, postController.createPost)
@@ -24,6 +22,10 @@ router.route('/:id/posts')
 router.route('/:id/posts/:pid')
     .patch(tokensController.isLoggedIn, postController.editPost)
     .delete(tokensController.isLoggedIn, postController.deletePost)
+
+router.route('/:id/comments/:cid')
+    .patch(commentController.editComment)
+    .delete(commentController.deleteComment)
 
 router.route('/:id/friends')
     .get(userController.getFriends)
