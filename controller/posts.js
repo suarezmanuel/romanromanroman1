@@ -25,6 +25,25 @@ const getAllPosts = async (req, res) => {
     res.json(posts);
 }
 
+const editPost = async (req, res) => {
+    const post = await postService.editPost(
+        req.params.pid, 
+        req.body.content,
+        req.body.image)
+    if (!post) {
+        return res.status(404).json({ errors: ['Edit aborted'] })
+    }
+    res.json(post)
+}
+
+const deletePost = async (req, res) => {
+    const post = await postService.deletePost(req.params.pid)
+    if (!post) {
+        return res.status(404).json({ errors: ['Delete aborted'] })
+    }
+    res.json(post)
+}
+
 module.exports = {
-    createPost, getUserPosts, getAllPosts
+    createPost, getUserPosts, getAllPosts, editPost, deletePost
 }

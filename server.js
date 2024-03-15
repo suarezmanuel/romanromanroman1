@@ -10,6 +10,8 @@ const users = require('./routes/users')
 
 const posts = require('./routes/posts')
 
+const tokens = require('./routes/tokens')
+
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -26,5 +28,7 @@ server.use(express.json())
 server.use('/api/users', users)
 
 server.use('/api/posts', posts)
+
+server.use('/api/tokens', tokens)
 
 server.listen(process.env.SERVER_PORT)

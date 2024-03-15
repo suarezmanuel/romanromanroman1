@@ -1,8 +1,7 @@
 const express = require('express');
 var router = express.Router();
 const postController = require('../controller/posts');
-
-// localhost/user/api/users
+// localhost/user/api/post
 
 router.route('/')
     .get(postController.getAllPosts)
