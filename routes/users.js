@@ -3,7 +3,8 @@ var router = express.Router();
 const userController = require('../controller/users');
 const postController = require('../controller/posts');
 const commentController = require('../controller/comments');
-// localhost/user/api/users
+const tokensController = require('../controller/tokens');
+
 
 router.route('/')
     .get(userController.getUsers)
@@ -15,12 +16,12 @@ router.route('/:id')
     .delete(userController.deleteUser)
 
 router.route('/:id/posts')
-    .get(postController.getUserPosts)
-    .post(postController.createPost)
+    .get(tokensController.isLoggedIn, postController.getUserPosts)
+    .post(tokensController.isLoggedIn, postController.createPost)
 
 router.route('/:id/posts/:pid')
-    .patch(postController.editPost)
-    .delete(postController.deletePost)
+    .patch(tokensController.isLoggedIn, postController.editPost)
+    .delete(tokensController.isLoggedIn, postController.deletePost)
 
 router.route('/:id/comments/:cid')
     .patch(commentController.editComment)

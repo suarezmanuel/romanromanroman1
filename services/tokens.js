@@ -4,6 +4,7 @@ const key = 'secretKey';
 
 // Ensure that the user sent a valid token
 const isLoggedIn = (authorization, verifyData) => {
+    console.log(authorization, verifyData)
     // If the request has an authorization header
     if (!authorization)
         return 403;
@@ -15,8 +16,9 @@ const isLoggedIn = (authorization, verifyData) => {
     let result = jwt.verify(token, key, (err, data) => {
         if (err) return 404; // error
         if (data != verifyData) return 401; // Invalid Token
+        return 200;
     });
-    console.log(result)
+    // console.log(result)
     return result;
 }
 

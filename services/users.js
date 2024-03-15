@@ -137,7 +137,7 @@ const checkFriendRequest = async (id1, id2) => {
 }
 
 module.exports = {
-    createUser, getUsers, getUser, editUser, deleteUser, 
+    createUser, getUsers, getUser, editUser, deleteUser,
     getFriends, sendFriendRequest, acceptFriendRequest, deleteFriendRequest,
     // checkFriendRequest, doesUserExist, checkCredentials
 }
