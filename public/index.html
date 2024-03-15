@@ -4,165 +4,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>Document</title>
 </head>
 
 <body>
 
-    <div id="createtoken" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Create Token</b><br>
-            id:   <input id="createtoken1"><br>
-            username:   <input id="createtoken2"><br>
-            password:   <input id="createtoken3"><br>
-            <button onclick="createToken()">create token</button><br>
+    <div class="container">
+
+        <div style="background-color: rgb(244, 127, 112); width:fit-content;" class="item">
+
+            <div id="createtoken" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Create Token</b><br>
+                    id:   <input id="createtoken1"><br>
+                    username:   <input id="createtoken2"><br>
+                    password:   <input id="createtoken3"><br>
+                    <button onclick="createToken()">create token</button><br>
+            </div>
+
+            <div id="checklogin" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Check Login</b><br>
+                    id:   <input id="checklogin1"><br>
+                    <button onclick="isLoggedIn()">Check Login</button><br>
+            </div>
+        </div>
+
+        <div style="background-color: rgb(112, 112, 244); width:fit-content;" class="item">
+
+            <div id="createuser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Create User</b><br>
+                    displayName:<input id="createuser1"><br>
+                    username:   <input id="createuser2"><br>
+                    password:   <input id="createuser3"><br>
+                    pfp:        <input id="createuser4"><br>
+                    <button onclick="createUser()">create user</button><br>
+            </div>
+
+            <div id="getusers" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Get users</b><br>
+                <textarea id="getusers1"></textarea>
+                <button onclick="getUsers()">get users</button><br>
+            </div>
+
+            <div id="getuser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Get user by ID</b><br>
+                id:  <input id="getuser0"><br>
+                <textarea id="getuser1"></textarea>
+                <button onclick="getUserByID()">get user</button><br>
+            </div>
+
+
+            <div id="edituser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Edit user</b><br>
+                id:  <input id="edituser0"><br>
+                username:  <input id="edituser1"><br>
+                password:    <input id="edituser2"><br>
+                displayname:  <input id="edituser3"><br>
+                pfp:    <input id="edituser4"><br>
+                <button onclick="editUser()">edit user</button><br>
+            </div>  
+
+            <div id="deleteuser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Delete user</b><br>
+                id:  <input id="deleteuser1"><br>
+                <button onclick="deleteUser()">delete user</button><br>
+            </div>  
+        </div>
+
+        <div style="background-color: rgb(163, 244, 112); width:fit-content;" class="item">
+            <div id="createpost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Create Post</b><br>
+                    author id:   <input id="createpost3"><br>
+                    content:     <input id="createpost1"><br>
+                    image:       <input id="createpost2"><br>
+                    <!-- date:        <input id="createpost4"><br> -->
+                    <!-- likes:       <input id="createpost5"><br> -->
+                    <button onclick="createPost()">create post</button><br>
+            </div>
+            
+            <div id="getallposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Get All Posts</b><br>
+                <textarea id="getallposts1"></textarea>
+                <button onclick="getAllPosts()">get posts</button><br>
+            </div> 
+
+            <div id="getposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Get User Posts</b><br>
+                user id:   <input id="getposts1"><br>
+                <textarea id="getposts2"></textarea>
+                <button onclick="getUserPosts()">get posts</button><br>
+            </div>  
+            
+            <div id="editpost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Edit Post</b><br>
+                user id: <input id="editpost3"><br>
+                Post id: <input id="editpost0"><br>
+                content: <textarea id="editpost1"></textarea><br>
+                image: <input id="editpost2"><br>
+                <button onclick="editPost()">Edit Post</button><br>
+            </div>
+            
+            <div id="deletepost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Delete Post</b><br>
+                user id: <input id="deletepost3"><br>
+                Post id: <input id="deletepost0"><br>
+                <button onclick="deletePost()">Delete Post</button><br>
+            </div>
+        </div>
+
+        <div style="background-color: rgb(240, 206, 111); width:fit-content;" class="item">
+            <div id="createcomment" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Create Comment</b><br>
+                    parent post id:     <input id="createcomment1"><br>
+                    author id:          <input id="createcomment2"><br>
+                    content:            <input id="createcomment3"><br>
+                    <button onclick="createCommenta()">create comment</button><br>
+            </div>
+
+            <div id="getcomments" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Get Comments</b><br>
+                parent post id:         <input id="getcomments1"><br>
+                <textarea></textarea>
+                
+                <button onclick="getComments()">get posts</button><br>
+            </div> 
+        </div>
+
+        <div style="background-color: rgb(160, 111, 240); width:fit-content;" class="item">
+            <div id="getfriendss" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Get Friends</b><br>
+                parent post id:<input id="getfriends1"><br>
+                <textarea id="getfriends2"></textarea>
+                <button onclick="getFriends()">get friends</button><br>
+            </div> 
+
+            <div id="sendrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Send friend request</b><br>
+                from id:  <input id="send1"><br>
+                to id:    <input id="send2"><br>
+                <button onclick="sendFriendRequest()">send friend request</button><br>
+            </div>  
+
+            <div id="acceptrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Accept friend request</b><br>
+                from id:  <input id="accept1"><br>
+                to id:    <input id="accept2"><br>
+                <button onclick="acceptFriendRequest()">accept friend request</button><br>
+            </div>  
+
+            <div id="deleterequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Delete friend request</b><br>
+                from id:  <input id="delete1"><br>
+                to id:    <input id="delete2"><br>
+                <button onclick="deleteFriendRequest()">accept friend request</button><br>
+            </div> 
+        </div>
+
     </div>
-
-    <div id="checklogin" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Check Login</b><br>
-            id:   <input id="checklogin1"><br>
-            <button onclick="isLoggedIn()">Check Login</button><br>
-    </div>
-
-    <div id="createuser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Create User</b><br>
-            displayName:<input id="createuser1"><br>
-            username:   <input id="createuser2"><br>
-            password:   <input id="createuser3"><br>
-            pfp:        <input id="createuser4"><br>
-            <button onclick="createUser()">create user</button><br>
-    </div>
-
-
-
-    <div id="getusers" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Get users</b><br>
-        <textarea id="getusers1"></textarea>
-        <button onclick="getUsers()">get users</button><br>
-    </div>
-
-    <div id="getuser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Get user by ID</b><br>
-        id:  <input id="getuser0"><br>
-        <textarea id="getuser1"></textarea>
-        <button onclick="getUserByID()">get user</button><br>
-    </div>
-
-
-    <div id="edituser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Edit user</b><br>
-        id:  <input id="edituser0"><br>
-        username:  <input id="edituser1"><br>
-        password:    <input id="edituser2"><br>
-        displayname:  <input id="edituser3"><br>
-        pfp:    <input id="edituser4"><br>
-        <button onclick="editUser()">edit user</button><br>
-    </div>  
-
-    <div id="deleteuser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Delete user</b><br>
-        id:  <input id="deleteuser1"><br>
-        <button onclick="deleteUser()">delete user</button><br>
-    </div>  
-
-
-
-
-
-    <div id="createpost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Create Post</b><br>
-            author id:   <input id="createpost3"><br>
-            content:     <input id="createpost1"><br>
-            image:       <input id="createpost2"><br>
-            <!-- date:        <input id="createpost4"><br> -->
-            <!-- likes:       <input id="createpost5"><br> -->
-            <button onclick="createPost()">create post</button><br>
-    </div>
-
-
-    
-    <div id="getallposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Get All Posts</b><br>
-        <textarea id="getallposts1"></textarea>
-        <button onclick="getAllPosts()">get posts</button><br>
-    </div> 
-
-
-
-    <div id="getposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Get User Posts</b><br>
-        user id:   <input id="getposts1"><br>
-        <textarea id="getposts2"></textarea>
-        <button onclick="getUserPosts()">get posts</button><br>
-    </div>  
-    
-    <div id="editpost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Edit Post</b><br>
-        user id: <input id="editpost3"><br>
-        Post id: <input id="editpost0"><br>
-        content: <textarea id="editpost1"></textarea><br>
-        image: <input id="editpost2"><br>
-        <button onclick="editPost()">Edit Post</button><br>
-    </div>
-    
-    <div id="deletepost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Delete Post</b><br>
-        user id: <input id="deletepost3"><br>
-        Post id: <input id="deletepost0"><br>
-        <button onclick="deletePost()">Delete Post</button><br>
-    </div>
-
-
-
-
-
-    <div id="createcomment" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Create Comment</b><br>
-            parent post id:     <input id="createcomment1"><br>
-            author id:          <input id="createcomment2"><br>
-            content:            <input id="createcomment3"><br>
-            <button onclick="createCommenta()">create comment</button><br>
-    </div>
-
-
-
-    <div id="getcomments" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Get Comments</b><br>
-        parent post id:         <input id="getcomments1"><br>
-        <textarea></textarea>
-        
-        <button onclick="getComments()">get posts</button><br>
-    </div> 
-
-
-    <div id="getfriendss" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Get Friends</b><br>
-        parent post id:<input id="getfriends1"><br>
-        <textarea id="getfriends2"></textarea>
-        <button onclick="getFriends()">get friends</button><br>
-    </div> 
-
-    <div id="sendrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Send friend request</b><br>
-        from id:  <input id="send1"><br>
-        to id:    <input id="send2"><br>
-        <button onclick="sendFriendRequest()">send friend request</button><br>
-    </div>  
-
-
-
-    <div id="acceptrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Accept friend request</b><br>
-        from id:  <input id="accept1"><br>
-        to id:    <input id="accept2"><br>
-        <button onclick="acceptFriendRequest()">accept friend request</button><br>
-    </div>  
-
-    <div id="deleterequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
-        <b>Delete friend request</b><br>
-        from id:  <input id="delete1"><br>
-        to id:    <input id="delete2"><br>
-        <button onclick="deleteFriendRequest()">accept friend request</button><br>
-    </div>  
 
     <script>
         // TOKENS
@@ -188,13 +186,29 @@
                     "Content-Type": "application/json",
                     'authorization': 'bearer ' + TOKEN
                 },
-                // body: JSON.stringify({
-                //     id: document.getElementById('createtoken1').value
-                // })
-            }).then(data => console.log(data.json()))
-            .catch(error => console.log(error))
-            console.log(token)
-            // TOKEN = token;
+            }).then(response => {
+                    if (!response.ok) {
+                        console.log(`Error ${response.status}: ${response.statusText}`);
+                        return response.json();
+                    } 
+                    else {
+                        return response.json();
+                    }
+                })
+                .then(data => {
+                    if (data) {
+                        return data;
+                    }
+                })
+                .catch(error => {
+                    console.error('Network error:', error);
+                });
+            if(token.error){
+                console.log(token.error)
+            }
+            if(token.data){
+                console.log(token.data)
+            }
         }
 
         // USERS //
@@ -203,7 +217,6 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    'authorization': 'bearer ' + TOKEN
                 },
                 body: JSON.stringify({
                     displayName: document.getElementById('createuser1').value,
@@ -213,8 +226,6 @@
                 })
             }).then(data => data.json())
         }
-
-
 
         async function getUsers() {
             const users = await fetch('http://localhost:3000/api/users', {
@@ -275,7 +286,6 @@
                 headers: {
                     "Content-Type": "application/json",
                     'authorization': 'bearer ' + TOKEN
-
                 },
                 body: JSON.stringify({
                     content: document.getElementById('createpost1').value,

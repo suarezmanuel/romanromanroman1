@@ -2,6 +2,7 @@ const express = require('express');
 var router = express.Router();
 const userController = require('../controller/users');
 const postController = require('../controller/posts');
+const tokensController = require('../controller/tokens');
 // localhost/user/api/users
 
 router.route('/')
@@ -17,12 +18,12 @@ router.route('/:id')
 //     .get(userController.getFriends)
 
 router.route('/:id/posts')
-    .get(postController.getUserPosts)
-    .post(postController.createPost)
+    .get(tokensController.isLoggedIn, postController.getUserPosts)
+    .post(tokensController.isLoggedIn, postController.createPost)
 
 router.route('/:id/posts/:pid')
-    .patch(postController.editPost)
-    .delete(postController.deletePost)
+    .patch(tokensController.isLoggedIn, postController.editPost)
+    .delete(tokensController.isLoggedIn, postController.deletePost)
 
 router.route('/:id/friends')
     .get(userController.getFriends)
