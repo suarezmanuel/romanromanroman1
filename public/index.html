@@ -345,7 +345,7 @@
         }accept1
 
         async function editPost() {
-            const posts = await fetch('http://localhost:3000/api/users/' + document.getElementById('editpost3').value + '/posts/' + document.getElementById('editpost0').value, {
+            const post = await fetch('http://localhost:3000/api/users/' + document.getElementById('editpost3').value + '/posts/' + document.getElementById('editpost0').value, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -356,7 +356,6 @@
                     image: document.getElementById('editpost2').value,
                 })
             }).then(data => data.json());
-            // console.log(posts)
         }
 
         async function deletePost() {

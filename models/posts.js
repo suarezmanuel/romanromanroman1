@@ -4,6 +4,11 @@ const User = require('./users');
 const Schema = mongoose.Schema;
 
 const Post = new Schema({
+
+    _id: {
+        type: String,
+        required: false
+    },
     content: {
         type: String,
         required: true

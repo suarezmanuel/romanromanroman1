@@ -10,6 +10,9 @@ router.route('/')
     .get(userController.getUsers)
     .post(userController.createUser)
 
+// router.route('/:username')
+//     .get(userController.getUserByUsername)
+
 router.route('/:id')
     .get(userController.getUser)
     .patch(userController.editUser)
@@ -18,22 +21,22 @@ router.route('/:id')
 router.route('/:id/posts')
     .get(tokensController.isLoggedIn, postController.getUserPosts)
     .post(tokensController.isLoggedIn, postController.createPost)
-
+    
 router.route('/:id/posts/:pid')
     .patch(tokensController.isLoggedIn, postController.editPost)
     .delete(tokensController.isLoggedIn, postController.deletePost)
 
 router.route('/:id/comments/:cid')
-    .patch(commentController.editComment)
-    .delete(commentController.deleteComment)
+    .patch(tokensController.isLoggedIn, commentController.editComment)
+    .delete(tokensController.isLoggedIn, commentController.deleteComment)
 
 router.route('/:id/friends')
-    .get(userController.getFriends)
-    .post(userController.sendFriendRequest)
+    .get(tokensController.isLoggedIn, userController.getFriends)
+    .post(tokensController.isLoggedIn, userController.sendFriendRequest)
 
 router.route('/:id/friends/:fid')
-    .patch(userController.acceptFriendRequest)
-    .delete(userController.deleteFriendRequest)
+    .patch(tokensController.isLoggedIn, userController.acceptFriendRequest)
+    .delete(tokensController.isLoggedIn, userController.deleteFriendRequest)
 
 module.exports = router;
 

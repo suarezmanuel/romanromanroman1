@@ -4,7 +4,7 @@
   "description": "Our implementation of the server for the Facebook-like social network",
   "main": "index.js",
   "scripts": {
-    "start": "SET NODE_ENV=local && node server.js",
+    "start": "set NODE_ENV=local && node server.js",
     "test": "SET NODE_ENV=test && node server.js"
   },
   "keywords": [],
