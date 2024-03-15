@@ -32,6 +32,8 @@
             <button onclick="createUser()">create user</button><br>
     </div>
 
+
+
     <div id="getusers" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get users</b><br>
         <textarea id="getusers1"></textarea>
@@ -75,12 +77,16 @@
             <!-- likes:       <input id="createpost5"><br> -->
             <button onclick="createPost()">create post</button><br>
     </div>
+
+
     
     <div id="getallposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get All Posts</b><br>
         <textarea id="getallposts1"></textarea>
         <button onclick="getAllPosts()">get posts</button><br>
     </div> 
+
+
 
     <div id="getposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get User Posts</b><br>
@@ -112,11 +118,12 @@
     <div id="createcomment" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Create Comment</b><br>
             parent post id:     <input id="createcomment1"><br>
-            author id:          <input id="createcomment3"><br>
-            content:            <input id="createcomment2"><br>
-            pfp:                <input id="createcomment4"><br>
-            <button onclick="createComment()">create post</button><br>
+            author id:          <input id="createcomment2"><br>
+            content:            <input id="createcomment3"><br>
+            <button onclick="createCommenta()">create comment</button><br>
     </div>
+
+
 
     <div id="getcomments" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Get Comments</b><br>
@@ -140,6 +147,8 @@
         to id:    <input id="send2"><br>
         <button onclick="sendFriendRequest()">send friend request</button><br>
     </div>  
+
+
 
     <div id="acceptrequest" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
         <b>Accept friend request</b><br>
@@ -204,6 +213,8 @@
                 })
             }).then(data => data.json())
         }
+
+
 
         async function getUsers() {
             const users = await fetch('http://localhost:3000/api/users', {
@@ -274,6 +285,8 @@
             }).then(data => data.json())
         }
 
+
+
         async function getAllPosts() {
             const posts = await fetch('http://localhost:3000/api/posts', {
                 method: "GET",
@@ -286,6 +299,7 @@
             console.log(posts);
             document.getElementById('getallposts1').innerText = JSON.stringify(posts);
         }
+
 
 
         async function getUserPosts() {

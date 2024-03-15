@@ -1,18 +1,10 @@
 const express = require('express');
 var router = express.Router();
-const userController = require('../controller/users');
+const commentController = require('../controller/comments');
 
-// localhost/user/api/users
-
-router.route('/')
-    .get(userController.getUsers)
-    .post(userController.createUser)
-
-router.route('/friendRequest/send')
-    .post(userController.sendFriendRequest)
-
-router.route('/:username')
-    .get(userController.getUser)
+router.route('/:id')
+    .get(commentController.getComments)
+    .post(commentController.createComment)
 
 module.exports = router;
 
