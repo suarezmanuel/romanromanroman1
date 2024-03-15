@@ -2,14 +2,21 @@ const express = require('express');
 var router = express.Router();
 const postController = require('../controller/posts');
 const commentController = require('../controller/comments');
-// localhost/user/api/post
+const tokensController = require('../controller/tokens');
+const { errorWrapper } = require('./helper');
 
 router.route('/')
-    .get(postController.getAllPosts)
+    .get(errorWrapper(postController.getAllPosts))
 
 router.route('/:id')
-    .post(commentController.createComment)
-    .get(commentController.getComments)
+    .post(errorWrapper(commentController.createComment))
+    .get(errorWrapper(commentController.getComments))
+
+router.route('/:id/friend-posts')
+    .get(tokensController.isLoggedIn, errorWrapper(postController.getFriendPosts))
+
+router.route('/:id/stranger-posts')
+    .get(tokensController.isLoggedIn, errorWrapper(postController.getStrangerPosts))
 
 module.exports = router;
 

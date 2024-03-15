@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=local node server.js",
+    "populate": "cross-env NODE_ENV=local node scripts/populate.js",
+    "reset": "cross-env NODE_ENV=local node scripts/reset.js",
     "test": "cross-env NODE_ENV=test node server.js"
   },
   "keywords": [],
