@@ -1,10 +1,15 @@
 const express = require('express');
 var router = express.Router();
 const postController = require('../controller/posts');
+const commentController = require('../controller/comments');
 // localhost/user/api/post
 
 router.route('/')
     .get(postController.getAllPosts)
+
+router.route('/:id')
+    .post(commentController.createComment)
+    .get(commentController.getComments)
 
 module.exports = router;
 

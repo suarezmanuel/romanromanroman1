@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('./comments');
+const User = require('./users');
 
 const Schema = mongoose.Schema;
 
@@ -20,5 +20,6 @@ const Comment = new Schema({
         type: Date,
         default: Date.now
     }
-});
+}, {versionKey: false});
+
 module.exports = mongoose.model('Comment', Comment, "comments");
