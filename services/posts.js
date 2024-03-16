@@ -1,11 +1,14 @@
 const Post = require("../models/posts");
 
-const createPost = async (content, image, authorId, date) => {
+const createPost = async (content, image, authorId, date, authorPfp, authorDisplayName) => {
+    console.log("authorPfp is" + authorPfp)
     const post = new Post({
         content: content,
         image: image,
         authorId: authorId,
         date: date,
+        authorPfp: authorPfp,
+        authorDisplayName: authorDisplayName,
         likes: 0
     })
     await post.save();

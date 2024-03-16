@@ -21,6 +21,14 @@ const Post = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    authorPfp: {
+        type: String,
+        required: true
+    },
+    authorDisplayName: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now

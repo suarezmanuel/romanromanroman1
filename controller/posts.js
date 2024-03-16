@@ -1,16 +1,19 @@
 const postService = require('../services/posts');
 
 const createPost = async (req, res) => {
+    console.log("authorPfp in controller is" + req.authorPfp)
     res.json(await postService.createPost(
         req.body.content,
         req.body.image,
         req.params.id,
         req.body.date,
+        req.body.authorPfp,
+        req.body.authorDisplayName,
     ))
 }
 
 const getUserPosts = async (req, res) => {
-    console.log(req.params.id);
+    console.log("his id is " + req.params.id);
     const posts = await postService.getPostById(req.params.id);
     if (!posts) {
     return res.status(404).json({ errors: ['Posts not found'] });
