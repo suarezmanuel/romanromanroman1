@@ -34,15 +34,15 @@ const POST_AMOUNT = 3;
     for (const name of NAMES) {
         const username = name.toLowerCase();
         const password = username.split('').reverse().join('');
-        const pfp = PFPS[Math.floor(Math.random() * (PFPS.length - 1))];
+        const pfp = PFPS[Math.floor(Math.random() * (PFPS.length))];
 
         // create user
         const user = await userService.createUser(name, username, password, pfp);
 
         for (let index = 0; index < POST_AMOUNT; index++) {
-            const likes = Math.floor(Math.random() * 10);
+            const likes = Math.floor(Math.random() * 20);
 
-            const picture = PICTURES[Math.floor(Math.random() * (PICTURES.length - 1))];
+            const picture = PICTURES[Math.floor(Math.random() * (PICTURES.length))];
             // populate user posts
             await postService.createPost(
                 `This is a test post number ${index} from ${name}`,
