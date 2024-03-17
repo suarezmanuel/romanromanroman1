@@ -12,6 +12,7 @@
 
     <div class="container">
 
+        <!-- login, token -->
         <div style="background-color: rgb(244, 127, 112); width:fit-content;" class="item">
 
             <div id="createtoken" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
@@ -29,6 +30,7 @@
             </div>
         </div>
 
+        <!-- users -->
         <div style="background-color: rgb(112, 112, 244); width:fit-content;" class="item">
 
             <div id="createuser" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
@@ -71,17 +73,20 @@
             </div>  
         </div>
 
+        <!-- posts -->
         <div style="background-color: rgb(163, 244, 112); width:fit-content;" class="item">
             <div id="createpost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
                 <b>Create Post</b><br>
                     author id:   <input id="createpost3"><br>
                     content:     <input id="createpost1"><br>
                     image:       <input id="createpost2"><br>
+                    authorPfp:     <input id="createpost4"><br>
+                    authorDisplayName:       <input id="createpost5"><br>
                     <!-- date:        <input id="createpost4"><br> -->
                     <!-- likes:       <input id="createpost5"><br> -->
                     <button onclick="createPost()">create post</button><br>
             </div>
-            
+
             <div id="getallposts" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
                 <b>Get All Posts</b><br>
                 <textarea id="getallposts1"></textarea>
@@ -94,7 +99,7 @@
                 <textarea id="getposts2"></textarea>
                 <button onclick="getUserPosts()">get posts</button><br>
             </div>  
-            
+
             <div id="editpost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
                 <b>Edit Post</b><br>
                 user id: <input id="editpost3"><br>
@@ -103,7 +108,7 @@
                 image: <input id="editpost2"><br>
                 <button onclick="editPost()">Edit Post</button><br>
             </div>
-            
+
             <div id="deletepost" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
                 <b>Delete Post</b><br>
                 user id: <input id="deletepost3"><br>
@@ -112,24 +117,43 @@
             </div>
         </div>
 
+        <!-- comments -->
         <div style="background-color: rgb(240, 206, 111); width:fit-content;" class="item">
             <div id="createcomment" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
                 <b>Create Comment</b><br>
                     parent post id:     <input id="createcomment1"><br>
                     author id:          <input id="createcomment2"><br>
                     content:            <input id="createcomment3"><br>
-                    <button onclick="createCommenta()">create comment</button><br>
+                    <button onclick="createCommentt()">create comment</button><br>
             </div>
 
             <div id="getcomments" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
                 <b>Get Comments</b><br>
-                parent post id:         <input id="getcomments1"><br>
-                <textarea></textarea>
-                
-                <button onclick="getComments()">get posts</button><br>
+                    parent post id: <input id="getcomments1"><br>
+                <textarea id="getcomments2"></textarea>
+
+                <button onclick="getComments()">get comments</button><br>
+            </div> 
+
+            <div id="editcomment" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Edit Comment</b><br>
+                user id: <input id="editcomment1"><br>
+                comment id: <input id="editcomment2"><br>
+                content: <textarea id="editcomment3"></textarea><br>
+
+                <button onclick="editComment()">edit comment</button><br>
+            </div>
+
+            <div id="deletecomment" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
+                <b>Delete Comment</b><br>
+                user id:         <input id="deletecomment1"><br>
+                comment id:         <input id="deletecomment2"><br>
+
+                <button onclick="deleteComment()">delete</button><br>
             </div> 
         </div>
 
+        <!-- friends -->
         <div style="background-color: rgb(160, 111, 240); width:fit-content;" class="item">
             <div id="getfriendss" style="background-color: rgb(208, 173, 173); width:fit-content; margin-bottom: 30px;">
                 <b>Get Friends</b><br>
@@ -163,60 +187,62 @@
     </div>
 
     <script>
-        // TOKENS
-        let TOKEN = '';
-        async function createToken() {
-            const token = await fetch('http://localhost:3000/api/tokens', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id: document.getElementById('createtoken1').value
-                })
-            }).then(data => data.json())
-            console.log(token)
-            TOKEN = token;
-        }
 
-        async function isLoggedIn() {
-            const token = await fetch('http://localhost:3000/api/tokens/'+ document.getElementById('checklogin1').value, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    'authorization': 'bearer ' + TOKEN
-                },
-            }).then(response => {
-                    if (!response.ok) {
-                        console.log(`Error ${response.status}: ${response.statusText}`);
-                        return response.json();
-                    } 
-                    else {
-                        return response.json();
-                    }
-                })
-                .then(data => {
-                    if (data) {
-                        return data;
-                    }
-                })
-                .catch(error => {
-                    console.error('Network error:', error);
-                });
-            if(token.error){
-                console.log(token.error)
-            }
-            if(token.data){
-                console.log(token.data)
-            }
+         // TOKENS
+    let TOKEN = '';
+    async function createToken() {
+        const token = await fetch('http://localhost:8080/api/tokens', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: document.getElementById('createtoken1').value
+            })
+        }).then(data => data.json())
+        console.log(token)
+        TOKEN = token;
+    }
+
+    async function isLoggedIn() {
+        const token = await fetch('http://localhost:8080/api/tokens/'+ document.getElementById('checklogin1').value, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'authorization': 'bearer ' + TOKEN
+            },
+        }).then(response => {
+                if (!response.ok) {
+                    console.log(`Error ${response.status}: ${response.statusText}`);
+                    return response.json();
+                } 
+                else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data) {
+                    return data;
+                }
+            })
+            .catch(error => {
+                console.error('Network error:', error);
+            });
+        if(token.error){
+            console.log(token.error)
         }
+        if(token.data){
+            console.log(token.data)
+        }
+    }
 
         // USERS //
         async function createUser() {
-            const user = await fetch('http://localhost:3000/api/users', {
+            const user = await fetch('http://localhost:8080/api/users', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    'authorization': 'bearer ' + TOKEN
                 },
                 body: JSON.stringify({
                     displayName: document.getElementById('createuser1').value,
@@ -228,7 +254,7 @@
         }
 
         async function getUsers() {
-            const users = await fetch('http://localhost:3000/api/users', {
+            const users = await fetch('http://localhost:8080/api/users', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -240,7 +266,7 @@
         }
 
         async function getUserByID() {
-            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('getuser0').value, {
+            const users = await fetch('http://localhost:8080/api/users/' + document.getElementById('getuser0').value, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -252,7 +278,7 @@
         }
 
         async function editUser() {
-            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('edituser0').value, {
+            const users = await fetch('http://localhost:8080/api/users/' + document.getElementById('edituser0').value, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -268,7 +294,7 @@
         }
 
         async function deleteUser() {
-            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('deleteuser1').value, {
+            const users = await fetch('http://localhost:8080/api/users/' + document.getElementById('deleteuser1').value, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -277,11 +303,9 @@
             // console.log(users)
         }
 
-
-
         // POSTS //
         async function createPost() {
-            const post = await fetch('http://localhost:3000/api/users/'+ document.getElementById('createpost3').value +'/posts', {
+            const post = await fetch('http://localhost:8080/api/users/'+ document.getElementById('createpost3').value +'/posts', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -290,15 +314,15 @@
                 body: JSON.stringify({
                     content: document.getElementById('createpost1').value,
                     image: document.getElementById('createpost2').value,
-                    date: new Date()
+                    date: new Date(),
+                    authorPfp: document.getElementById('createpost4').value,
+                    authorDisplayName: document.getElementById('createpost5').value,
                 })
             }).then(data => data.json())
         }
 
-
-
         async function getAllPosts() {
-            const posts = await fetch('http://localhost:3000/api/posts', {
+            const posts = await fetch('http://localhost:8080/api/posts', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -310,10 +334,8 @@
             document.getElementById('getallposts1').innerText = JSON.stringify(posts);
         }
 
-
-
         async function getUserPosts() {
-            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('getposts1').value +'/posts' , {
+            const users = await fetch('http://localhost:8080/api/users/' + document.getElementById('getposts1').value +'/posts' , {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -326,7 +348,7 @@
         }accept1
 
         async function editPost() {
-            const posts = await fetch('http://localhost:3000/api/users/' + document.getElementById('editpost3').value + '/posts/' + document.getElementById('editpost0').value, {
+            const post = await fetch('http://localhost:8080/api/users/' + document.getElementById('editpost3').value + '/posts/' + document.getElementById('editpost0').value, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -337,11 +359,10 @@
                     image: document.getElementById('editpost2').value,
                 })
             }).then(data => data.json());
-            // console.log(posts)
         }
 
         async function deletePost() {
-            const posts = await fetch('http://localhost:3000/api/users/' + document.getElementById('deletepost3').value + '/posts/' + document.getElementById('deletepost0').value, {
+            const posts = await fetch('http://localhost:8080/api/users/' + document.getElementById('deletepost3').value + '/posts/' + document.getElementById('deletepost0').value, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -351,10 +372,9 @@
             // console.log(posts)
         }
 
-
         // FRIENDS //
         async function getFriends() {
-            const friends = await fetch('http://localhost:3000/api/users/' + document.getElementById('getfriends1').value + '/friends', {
+            const friends = await fetch('http://localhost:8080/api/users/' + document.getElementById('getfriends1').value + '/friends', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -366,8 +386,8 @@
         }
 
         async function sendFriendRequest() {
-            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('send1').value + '/friends',
-             {
+            const users = await fetch('http://localhost:8080/api/users/' + document.getElementById('send1').value + '/friends',
+            {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -379,7 +399,7 @@
         }
 
         async function acceptFriendRequest() {
-            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('accept1').value + '/friends/' + document.getElementById('accept2').value, {
+            const users = await fetch('http://localhost:8080/api/users/' + document.getElementById('accept1').value + '/friends/' + document.getElementById('accept2').value, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -389,7 +409,7 @@
         }
 
         async function deleteFriendRequest() {
-            const users = await fetch('http://localhost:3000/api/users/' + document.getElementById('delete1').value + '/friends/' + document.getElementById('delete2').value, {
+            const users = await fetch('http://localhost:8080/api/users/' + document.getElementById('delete1').value + '/friends/' + document.getElementById('delete2').value, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -399,7 +419,60 @@
         }
 
 
+        async function createCommentt() {
+            // http://localhost:8080/api/posts/:id POST
+            const comment = await fetch('http://localhost:8080/api/posts/'+ document.getElementById('createcomment1').value, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'authorization': 'bearer ' + TOKEN
+                },
+                body: JSON.stringify({
+                    authorId: document.getElementById('createcomment2').value,
+                    content: document.getElementById('createcomment3').value,
+                    date: new Date()
+                })
+            }).then(data => data.json())
+        }
+
+        async function getComments() {
+            // http://localhost:8080/api/posts/:id GET
+            const comments = await fetch('http://localhost:8080/api/posts/'+ document.getElementById('getcomments1').value, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'authorization': 'bearer ' + TOKEN
+                }
+            }).then(data => data.json())
+
+            document.getElementById('getcomments2').innerText = JSON.stringify(comments);
+        }
+
+        async function editComment() {
+            // const comment = await fetch('http://localhost:8080/api/posts/'+ document.getElementById('editcomment1').value, {
+            const posts = await fetch('http://localhost:8080/api/users/'+ document.getElementById('editcomment1').value + '/comments/' + document.getElementById('editcomment2').value, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    'authorization': 'bearer ' + TOKEN
+                },
+                body: JSON.stringify({
+                    content: document.getElementById('editcomment3').value
+                })
+            }).then(data => data.json())
+        }
+
+        async function deleteComment() {
+            // const posts = await fetch('http://localhost:8080/api/posts/'+ document.getElementById('deletecomment1').value, {
+            const posts = await fetch('http://localhost:8080/api/users/'+ document.getElementById('deletecomment1').value + '/comments/' + document.getElementById('deletecomment2').value, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    'authorization': 'bearer ' + TOKEN
+                },
+            }).then(data => data.json());
+        }
+
     </script>
 </body>
-
 </html>

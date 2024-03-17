@@ -11,6 +11,7 @@ const isLoggedIn = async (req, res, next) => {
 }
 
 const createToken = async (req, res) => {
+    console.log("creating token")
     return res.status(200).json(await tokensService.createToken(req.body.id))
 }
 

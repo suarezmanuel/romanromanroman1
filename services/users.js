@@ -1,18 +1,22 @@
 const User = require("../models/users");
 const { use } = require("../routes/posts");
 
-const createUser = async (displayName, username, password, pfp) => {
+const createUser = async (displayName, username, password, pfp, friendRequests = []) => {
     const user = new User({
-        displayName: displayName,
-        username: username,
-        password: password,
-        pfp: pfp
+        displayName,
+        username,
+        password,
+        pfp,
+        friendRequests
     })
-    await user.save();
+    return await user.save();
 }
 
-const getUsers = async () => {
-    return await User.find({});
+const getUsers = async (maxAmount = 20) => {
+    return await User
+        .find({})
+        .limit(maxAmount)
+        .exec();
 }
 
 const getUser = async (id) => {
