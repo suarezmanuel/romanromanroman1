@@ -7,6 +7,6 @@ router.route('/')
     .post(errorWrapper(tokensController.createToken))
 
 router.route('/:id')
-    .get(errorWrapper(tokensController.isLoggedIn))
+    .get(tokensController.isLoggedIn, errorWrapper(tokensController.loginSucceeded))
 
 module.exports = router;

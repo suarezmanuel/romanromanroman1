@@ -98,11 +98,11 @@ const acceptFriendRequest = async (id1, id2) => {
         let user2 = await User.findById(id2);
         if (!user2) return false;
 
-        const index = user2.friendRequests.indexOf(user1._id)
+        const index = user1.friendRequests.indexOf(id2)
         if (index == -1) return false
-        user2.friendRequests.splice(index, 1)
-        user2.friends.push(user1._id)
-        await user2.save()
+        user1.friendRequests.splice(index, 1)
+        user2.friends.push(id2)
+        await user1.save()
         return true
     } catch (error) {
         return false;
@@ -117,10 +117,10 @@ const deleteFriendRequest = async (id1, id2) => {
         let user2 = await User.findById(id2);
         if (!user2) return false;
 
-        const index = user2.friendRequests.indexOf(user1._id)
+        const index = user1.friendRequests.indexOf(user2._id)
         if (index == -1) return false
-        user2.friendRequests.splice(index, 1)
-        await user2.save()
+        user1.friendRequests.splice(index, 1)
+        await user1.save()
         return true
     } catch (error) {
         return false;

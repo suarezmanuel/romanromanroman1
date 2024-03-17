@@ -1,7 +1,7 @@
 const postService = require('../services/posts');
 
 const createPost = async (req, res) => {
-    console.log("authorPfp in controller is" + req.authorPfp)
+    console.log("authorPfp in controller is " + req.authorPfp)
     res.json(await postService.createPost(
         req.body.content,
         req.body.image,
@@ -23,11 +23,16 @@ const getAllPosts = async (req, res) => {
     res.json(posts);
 }
 
-const getFriendPosts = async (req, res) => {
+const getAllFriendPosts = async (req, res) => {
     const user = await userService.getUser(req.params.id);
     const userFriends = user.friends.map(friendId => friendId.toString());
 
     const posts = await postService.getTargetPosts(userFriends, 10);
+    res.json(posts);
+}
+
+const getFriendPosts = async (req, res) => {
+    const posts = await postService.getPostById(req.params.fid);
     res.json(posts);
 }
 
@@ -71,5 +76,6 @@ const deletePost = async (req, res) => {
 }
 
 module.exports = {
-    createPost, getUserPosts, getAllPosts, editPost, editPostLikes, deletePost, getFriendPosts, getStrangerPosts
+    createPost, getUserPosts, getAllPosts, editPost, editPostLikes, deletePost,
+    getAllFriendPosts, getFriendPosts, getStrangerPosts
 }

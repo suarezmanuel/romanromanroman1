@@ -13,10 +13,13 @@ router.route('/:id')
     .get(errorWrapper(commentController.getComments))
 
 router.route('/:id/friend-posts')
-    .get(tokensController.isLoggedIn, errorWrapper(postController.getFriendPosts))
+    .get(tokensController.isLoggedIn, errorWrapper(postController.getAllFriendPosts))
 
 router.route('/:id/stranger-posts')
     .get(tokensController.isLoggedIn, errorWrapper(postController.getStrangerPosts))
+
+router.route('/:id/friend-posts/:fid')
+    .get(tokensController.isLoggedIn, errorWrapper(postController.getFriendPosts))
 
 module.exports = router;
 

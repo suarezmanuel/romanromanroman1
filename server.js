@@ -11,7 +11,12 @@ const customEnv = require('custom-env');
     const posts = require('./routes/posts')
     const tokens = require('./routes/tokens')
     
-    await mongoose.connect(process.env.MONGO_URL);
+    // await mongoose.connect(process.env.MONGO_URL);
+    mongoose.connect(process.env.MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    
     console.log(`Successfully connected to MongoDB at ${process.env.MONGO_URL}`);
     
     const server = express();
@@ -25,8 +30,6 @@ const customEnv = require('custom-env');
     server.use('/api/users', users)
     
     server.use('/api/posts', posts)
-    
-    // server.use('/api/posts', posts)
     
     server.use('/api/tokens', tokens)
     

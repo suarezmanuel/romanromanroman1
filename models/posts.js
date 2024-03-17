@@ -31,6 +31,10 @@ const Post = new Schema({
     likes: {
         type: Number,
         default: 0
-    }
+    },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
+    }],
 }, {versionKey: false});
 module.exports = mongoose.model('Post', Post, "posts");
